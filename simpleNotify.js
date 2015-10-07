@@ -35,9 +35,12 @@ function removeNotification(notificationId) {
     }
   }
 
+  // Do a outro transition
+  var notificationToRemove = document.getElementById(notificationId)
+  notificationToRemove.className = notificationToRemove.className + " removing";
   // Remove the notification from the DOM
-  var notificationToRemoveFromDOM = document.getElementById(notificationId);
-  notificationToRemoveFromDOM.parentNode.removeChild(notificationToRemoveFromDOM);
+  // TODO:check for event start.....
+  // notificationToRemove.addEventListener("animationend", removeFromDOM(notificationId));
 
   // Move the rest of the notifications to fill in the missing space.
   // Something with the index....
@@ -69,4 +72,9 @@ function moveDownExisitingNotifications(notificationsOnPage, height) {
       currentNotification.style.top = currentHeight + height + MARGIN_BETWEEEN_NOTIFICATIONS + "px";
     }
   }
+}
+
+function removeFromDOM(notificationId) {
+  var notificationToRemoveFromDOM = document.getElementById(notificationId);
+  notificationToRemoveFromDOM.parentNode.removeChild(notificationToRemoveFromDOM);
 }

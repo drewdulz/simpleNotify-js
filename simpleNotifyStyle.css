@@ -2,24 +2,25 @@
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
-  animation: fadein 2s;
-  -moz-animation: fadein 2s; /* Firefox */
-  -webkit-animation: fadein 2s; /* Safari and Chrome */
-  -o-animation: fadein 2s; /* Opera */
+  /* Animation on creation */
+  animation-name: fadein;
+  animation-duration: 2s;
 }
 
 .simple-notification.green {
 
 }
 
+/* Outro transition */
+.simple-notification.removing {
+  animation-name: fadeout;
+  animation-duration: 2s;
+}
+
 /* CSS Animations */
 @keyframes fadein {
-  from {
-    opacity:0;
-  }
-  to {
-    opacity:1;
-  }
+  from { opacity:0;}
+  to {opacity:1;}
 }
 @-moz-keyframes fadein { /* Firefox */
   from {
@@ -42,6 +43,39 @@
     opacity:0;
   }
   to {
-    opacity: 1;
+    opacity:1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity:1;
+  }
+  to {
+    opacity:0;
+  }
+}
+@-moz-keyframes fadeout { /* Firefox */
+  from {
+    opacity:1;
+  }
+  to {
+    opacity:0;
+  }
+}
+@-webkit-keyframes fadeout { /* Safari and Chrome */
+  from {
+    opacity:1;
+  }
+  to {
+    opacity:0;
+  }
+}
+@-o-keyframes fadeout { /* Opera */
+  from {
+    opacity:1;
+  }
+  to {
+    opacity:0;
   }
 }
