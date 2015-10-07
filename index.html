@@ -1,10 +1,13 @@
 <html>
   <head>
-    <script src="drew.js"></script>
+    <script src="simpleNotify.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="simpleNotifyStyle.css"> -->
   </head>
 
   <body>
-    <button onclick="notify('Hey there', 5, 'green')">Notify</button>
+    <button onclick="simpleNotify('Hey there, this will dissapear in 5 seconds', 5, 'green')">5 seconds</button>
+    <button onclick="simpleNotify('Hey there, this will dissapear in 10 seconds', 10, 'green')">10 seconds</button>
+    <button onclick="simpleNotify('Hey there, this will dissapear in 7 seconds', 7, 'green')">7 seconds</button>
   </body>
 
 </html>
