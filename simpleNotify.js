@@ -1,4 +1,13 @@
-// drew.js
+/*
+simpleNotify.js
+A simple notifications library built with pure javascript and no dependancies.
+Copyright Andrew Warkentin 2015. All rights reserved.
+
+To do:
+-move the notifications up when the one above is removed.
+-add a close button to close notifications
+-Add support for non auto-dismissing notifications
+*/
 
 // Some important variables
 var NOTIFICATION_CLASS_NAME = "simple-notification";
@@ -37,15 +46,15 @@ function removeNotification(notificationId) {
 
   // Do a outro transition
   var notificationToRemove = document.getElementById(notificationId)
-  notificationToRemove.className = notificationToRemove.className + " removing";
+  notificationToRemove.className = notificationToRemove.className + " fade-out";
   // Remove the notification from the DOM
-  // TODO:check for event start.....
-  // notificationToRemove.addEventListener("animationend", removeFromDOM(notificationId));
-
+  notificationToRemove.addEventListener("transitionend",function(){
+    removeFromDOM(notificationToRemove);
+  },false);
+  
   // Move the rest of the notifications to fill in the missing space.
   // Something with the index....
   // // Re-draw the rest of the notifications
-  // displayNotifications(notifications);
 }
 
 function showNotificationAtTopOfPage(notification) {
@@ -57,7 +66,7 @@ function showNotificationAtTopOfPage(notification) {
   div.style.color = "white";
   div.style.position = "fixed";
   div.style.top = "5px";
-  div.style.right = "5px";
+  div.style.right = "-200px"; // Position it to the right so that it starts off the page, and slides in from the CSS animation.
   div.innerHTML = notification.message;
   // Add it to the DOM
   document.body.appendChild(div);
@@ -74,7 +83,6 @@ function moveDownExisitingNotifications(notificationsOnPage, height) {
   }
 }
 
-function removeFromDOM(notificationId) {
-  var notificationToRemoveFromDOM = document.getElementById(notificationId);
-  notificationToRemoveFromDOM.parentNode.removeChild(notificationToRemoveFromDOM);
+function removeFromDOM(notificationToRemove) {
+  notificationToRemove.parentNode.removeChild(notificationToRemove);
 }
