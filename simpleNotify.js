@@ -13,12 +13,15 @@ Known bugs:
 -When called really fast in succession, the notifcations will show on top of each other.
 */
 
-
+document.addEventListener("DOMContentLoaded", function() { 
+  notificationTimingControl();
+});
 
 // Some important variables
 var NOTIFICATION_CLASS_NAME = "simple-notification";
 var MARGIN_BETWEEEN_NOTIFICATIONS = 5; //px
 
+var notificationsToPost = [];
 var notifications = [];
 var notificationCount = 0;
 
@@ -26,10 +29,19 @@ function simpleNotify(message, timeout, level) {
   notificationCount++;
   var notificationId = 'notification' + notificationCount;
   var newNotification = {"id": notificationId, "message": message, "timeout": timeout, "level": level };
-  notifications.unshift(newNotification);
+  notificationsToPost.push(newNotification);
+}
 
-  // Show the notification on the page
-  displayNewNotification(newNotification)
+// This functions prevents multiple notifications from being created at the same time and messing up all the timing and movements of other notifications.
+function notificationTimingControl() {
+  setInterval(function(){ 
+    if(notificationsToPost && notificationsToPost.length > 0) {
+      notifications.unshift(notificationsToPost[0]);
+      // Show the notification on the page
+      displayNewNotification(notificationsToPost[0]);
+      notificationsToPost.shift();
+    }
+  }, 1000);
 }
 
 function displayNewNotification(newNotification) {
