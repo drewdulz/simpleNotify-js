@@ -14,14 +14,16 @@ Known bugs:
 */
 
 document.addEventListener("DOMContentLoaded", function() { 
-  notificationTimingControl();
+  notificationCreateTimingControl();
+  notificationDestroyTimingControl();
 });
 
 // Some important variables
 var NOTIFICATION_CLASS_NAME = "simple-notification";
 var MARGIN_BETWEEEN_NOTIFICATIONS = 5; //px
 
-var notificationsToPost = [];
+var notificationsToCreate = [];
+var notificationsToDestroy = [];
 var notifications = [];
 var notificationCount = 0;
 
@@ -29,17 +31,28 @@ function simpleNotify(message, timeout, level) {
   notificationCount++;
   var notificationId = 'notification' + notificationCount;
   var newNotification = {"id": notificationId, "message": message, "timeout": timeout, "level": level };
-  notificationsToPost.push(newNotification);
+  notificationsToCreate.push(newNotification);
 }
 
 // This functions prevents multiple notifications from being created at the same time and messing up all the timing and movements of other notifications.
-function notificationTimingControl() {
+function notificationCreateTimingControl() {
   setInterval(function(){ 
-    if(notificationsToPost && notificationsToPost.length > 0) {
-      notifications.unshift(notificationsToPost[0]);
+    if(notificationsToCreate && notificationsToCreate.length > 0) {
+      notifications.unshift(notificationsToCreate[0]);
       // Show the notification on the page
-      displayNewNotification(notificationsToPost[0]);
-      notificationsToPost.shift();
+      displayNewNotification(notificationsToCreate[0]);
+      notificationsToCreate.shift();
+    }
+  }, 1000);
+}
+
+function notificationDestroyTimingControl() {
+  setInterval(function(){ 
+    console.log(notificationsToDestroy);
+    if(notificationsToDestroy && notificationsToDestroy.length > 0) {
+      // destory the existing notification on the page
+      removeNotification(notificationsToDestroy[0].id);
+      notificationsToDestroy.shift();
     }
   }, 1000);
 }
@@ -52,7 +65,9 @@ function displayNewNotification(newNotification) {
   // Move down the other notifications
   moveDownExisitingNotifications(notificationsOnPage, document.getElementById(newNotification.id).offsetHeight);
   // Start a timeout for the notification just displayed
-  setTimeout(function(){ removeNotification(newNotification.id) }, newNotification.timeout * 1000);
+  setTimeout(function(){ 
+    notificationsToDestroy.push(newNotification);
+  }, newNotification.timeout * 1000);
 }
 
 function removeNotification(notificationId) {
@@ -108,10 +123,11 @@ function shiftUpNotifications(notificationToRemove, height) {
   for(var i = 0; i <= notifications.length; i++) {
     // console.log(notifications[i]);
     if(notificationToRemove.id == notifications[i].id) {
-      for(var k = i+1; k <= notifications.length - 1; k++ ) {
-        var currentNotification = document.getElementById(notifications[k].id);
-        var currentTop = currentNotification.offsetTop;
-        currentNotification.style.top = currentTop - height - MARGIN_BETWEEEN_NOTIFICATIONS + "px";
+      for(var k = i+1; k < notifications.length; k++ ) {
+        var notificationToMove = document.getElementById(notifications[k].id);
+        console.log(notificationToMove);
+        var currentTop = notificationToMove.offsetTop;
+        notificationToMove.style.top = currentTop - height - MARGIN_BETWEEEN_NOTIFICATIONS + "px";
       }
       return;
     }
