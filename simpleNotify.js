@@ -7,10 +7,9 @@ To do:
 -add a close button to close notifications
 -Add support for non auto-dismissing notifications
 -Style the notifications
--Time notifications comeing in so that they come in not all at once. Everything works good if the functions are called a second apart.
 
 Known bugs:
--When called really fast in succession, the notifcations will show on top of each other.
+-When a notification is appaearing on the page at the same time that one is being dismissed, it will move up at the same time as the other notifications are moving down. This casuses them to overlap.
 */
 
 document.addEventListener("DOMContentLoaded", function() { 
@@ -54,7 +53,7 @@ function notificationDestroyTimingControl() {
       removeNotification(notificationsToDestroy[0].id);
       notificationsToDestroy.shift();
     }
-  }, 1000);
+  }, 1100);
 }
 
 function displayNewNotification(newNotification) {
