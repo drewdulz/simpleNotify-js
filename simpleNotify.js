@@ -12,7 +12,7 @@ Known bugs:
 -When a notification is appaearing on the page at the same time that one is being dismissed, it will move up at the same time as the other notifications are moving down. This casuses them to overlap.
 */
 
-document.addEventListener("DOMContentLoaded", function() { 
+document.addEventListener("DOMContentLoaded", function() {
   notificationCreateTimingControl();
   notificationDestroyTimingControl();
 });
@@ -35,7 +35,7 @@ function simpleNotify(message, timeout, level) {
 
 // This functions prevents multiple notifications from being created at the same time and messing up all the timing and movements of other notifications.
 function notificationCreateTimingControl() {
-  setInterval(function(){ 
+  setInterval(function(){
     if(notificationsToCreate && notificationsToCreate.length > 0) {
       notifications.unshift(notificationsToCreate[0]);
       // Show the notification on the page
@@ -46,7 +46,7 @@ function notificationCreateTimingControl() {
 }
 
 function notificationDestroyTimingControl() {
-  setInterval(function(){ 
+  setInterval(function(){
     console.log(notificationsToDestroy);
     if(notificationsToDestroy && notificationsToDestroy.length > 0) {
       // destory the existing notification on the page
@@ -64,7 +64,7 @@ function displayNewNotification(newNotification) {
   // Move down the other notifications
   moveDownExisitingNotifications(notificationsOnPage, document.getElementById(newNotification.id).offsetHeight);
   // Start a timeout for the notification just displayed
-  setTimeout(function(){ 
+  setTimeout(function(){
     notificationsToDestroy.push(newNotification);
   }, newNotification.timeout * 1000);
 }
