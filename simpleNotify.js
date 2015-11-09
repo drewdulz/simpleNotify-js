@@ -6,10 +6,9 @@ Copyright Andrew Warkentin 2015. All rights reserved.
 To do:
 -add a close button to close notifications
 -Add support for non auto-dismissing notifications
--Style the notifications
 
 Known bugs:
--When a notification is appaearing on the page at the same time that one is being dismissed, it will move up at the same time as the other notifications are moving down. This casuses them to overlap.
+-When lots of notifications are appearing on the screen, they can start to get confused and overlap or behave oddly.
 */
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -20,16 +19,17 @@ document.addEventListener("DOMContentLoaded", function() {
 // Some important variables
 var NOTIFICATION_CLASS_NAME = "simple-notification";
 var MARGIN_BETWEEEN_NOTIFICATIONS = 5; //px
+var NOTIFICATION_TIME = 7000 //ms
 
 var notificationsToCreate = [];
 var notificationsToDestroy = [];
 var notifications = [];
 var notificationCount = 0;
 
-function simpleNotify(message, timeout, level) {
+function simpleNotify(message, level) {
   notificationCount++;
   var notificationId = 'notification' + notificationCount;
-  var newNotification = {"id": notificationId, "message": message, "timeout": timeout, "level": level };
+  var newNotification = {"id": notificationId, "message": message, "level": level };
   notificationsToCreate.push(newNotification);
 }
 
@@ -47,13 +47,12 @@ function notificationCreateTimingControl() {
 
 function notificationDestroyTimingControl() {
   setInterval(function(){
-    console.log(notificationsToDestroy);
     if(notificationsToDestroy && notificationsToDestroy.length > 0) {
       // destory the existing notification on the page
       removeNotification(notificationsToDestroy[0].id);
       notificationsToDestroy.shift();
     }
-  }, 1100);
+  }, 2000);
 }
 
 function displayNewNotification(newNotification) {
@@ -66,21 +65,24 @@ function displayNewNotification(newNotification) {
   // Start a timeout for the notification just displayed
   setTimeout(function(){
     notificationsToDestroy.push(newNotification);
-  }, newNotification.timeout * 1000);
+  }, NOTIFICATION_TIME);
 }
 
 function removeNotification(notificationId) {
-  // Do a outro transition
-  var notificationToRemove = document.getElementById(notificationId)
-  notificationToRemove.className = notificationToRemove.className + " fade-out";
+  var notificationToRemove = document.getElementById(notificationId);
+  // Force a quick transition to be sure the listener will fire.
+  notificationToRemove.style.top = notificationToRemove.offsetTop + 1 + "px";
+  // Only do the fade out after the notification has finished moving if it in the process of moving down.
+  notificationToRemove.addEventListener("transitionend",function(){
+    // Do a outro transition (fade out)
+    notificationToRemove.className = notificationToRemove.className + " fade-out";
+    // Remove the notification from the DOM after the fade out has finished
+    notificationToRemove.addEventListener("transitionend",function(){
+      removeFromDOM(notificationToRemove);
+    },false);
+  },false);
   // Shift up the other notifications after they fade out (500ms)
   shiftUpNotifications(notificationToRemove, notificationToRemove.clientHeight);
-
-  // Remove the notification from the DOM
-  notificationToRemove.addEventListener("transitionend",function(){
-    removeFromDOM(notificationToRemove);
-  },false);
-
   // Remove the notification from the array
   for (var i = 0; i < notifications.length; i++) {
     if (notifications[i].id == notificationId) {
@@ -120,11 +122,9 @@ function removeFromDOM(notificationToRemove) {
 function shiftUpNotifications(notificationToRemove, height) {
   // When one notification is removed, shift up any that are beneath it.
   for(var i = 0; i <= notifications.length; i++) {
-    // console.log(notifications[i]);
     if(notificationToRemove.id == notifications[i].id) {
       for(var k = i+1; k < notifications.length; k++ ) {
         var notificationToMove = document.getElementById(notifications[k].id);
-        console.log(notificationToMove);
         var currentTop = notificationToMove.offsetTop;
         notificationToMove.style.top = currentTop - height - MARGIN_BETWEEEN_NOTIFICATIONS + "px";
       }
