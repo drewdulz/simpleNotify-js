@@ -28,6 +28,7 @@ var simpleNotify = {
   notificationCount : 0,
 
   notify : function(message, level) {
+    var level = typeof level !== 'undefined' ?  level : "good";
     simpleNotify.notificationCount++;
     var notificationId = 'notification' + simpleNotify.notificationCount;
     var newNotification = {"id": notificationId, "message": message, "level": level };

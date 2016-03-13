@@ -228,3 +228,17 @@ a {
 
 .site-footer-credits {
   color: #819198; }
+
+.button {
+  display: inline-block;
+  color: rgba(72, 160, 228, 0.7);
+  background-color: rgba(72, 160, 228, 0.08);
+  border-color: rgba(72, 160, 228, 0.50);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.3rem;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+.button:hover {
+  background-color: rgba(72, 160, 228, 0.2);
+}
