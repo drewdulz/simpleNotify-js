@@ -61,17 +61,17 @@
 
 /* CSS Animations */
 @keyframes slideIn {
-  100% { right: 5; }
+  100% { right: 5px; }
 }
 
 @-webkit-keyframes slideIn {
-  100% { right: 5; }
+  100% { right: 5px; }
 }
 
 @-moz-keyframes slideIn {
-  100% { right: 5; }
+  100% { right: 5px; }
 }
 
 @-o-keyframes slideIn {
-  100% { right: 5; }
+  100% { right: 5px; }
 }

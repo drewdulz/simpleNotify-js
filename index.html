@@ -1,14 +1,87 @@
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <script src="simpleNotify.js"></script>
-    <link rel="stylesheet" type="text/css" href="simpleNotifyStyle.css">
+    <meta charset="UTF-8">
+    <title>SimpleNotify.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/cayman.css">
+    <link rel="stylesheet" href="inc/simpleNotifyStyle.css">
+    <script src="inc/simpleNotify.js"></script>
   </head>
-
   <body>
-    <button onclick="simpleNotify.notify('Hey there, this will dissapear in 5 seconds', 'warning')">5 seconds Warning</button>
-    <button onclick="simpleNotify.notify('Hey there, this will dissapear in 10 seconds', 'good')">10 seconds Good</button>
-    <button onclick="simpleNotify.notify('Hey there, this will dissapear in 7 seconds', 'danger')">7 seconds Danger</button>
-    <button onclick="simpleNotify.notify('Hey there, this will dissapear in 3 seconds', 'attention')">3 seconds Attention</button>
+    <section class="page-header">
+      <h1 class="project-name">SimpleNotify.js</h1>
+      <h2 class="project-tagline">An easy to use pure javascript library for site-wide notifications.</h2>
+      <a href="https://github.com/drewdulz/simpleNotify.js" class="btn">View on GitHub</a>
+      <a href="https://drewdulz.github.io/simpleNotify.js/downloads/simpleNotify.zip" class="btn">Download</a>
+      <a href="https://drewdulz.github.io/simpleNotify.js/downloads/simpleNotifyMin.zip" class="btn">Download Minified</a>
+    </section>
+
+    <section class="main-content">
+      <h1><a id="user-content-header-1" class="anchor" href="#header-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is it?</h1>
+      <p>SimpleNotify.js is a pure javascript library for sending quick notifications to the users of your web app. It doesn't depend on any external libraries and is very lightweight and simple.</p>
+
+      <h1><a id="user-content-header-1" class="anchor" href="#header-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
+      <button class="button" onclick="simpleNotify.notify('Hey! This is a Simple Notification.')">Show a Notification</button>
+      <p>The notifications will automatically scale to fit the entire notification text.</p>
+      <button class="button" onclick="simpleNotify.notify('Hey! This is a Simple Notification. It has a lot of text in it, and as you can see the notification scales to fit it all automatically!', 'good')">Show a Long Notification</button>
+      <p>The notifications will automatically dismiss after 7 seconds.</p>
+
+
+      <h1><a id="user-content-header-2" class="anchor" href="#header-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instructions</h1>
+      <p>SimpleNotify is easy to use.</p>
+      <p>First include simpleNotify.js and simpleNotifyStyle.css avaliable <a href="https://drewdulz.github.io/simpleNotify.js/downloads/simpleNotify.zip">here.</a></p>
+      <p>Then all you need to do is call the simpleNotify function with the desired message.</p>
+      <pre><code>simpleNotify.notify('Hey! This is a simple notification.');</code></pre>
+
+
+      <h1><a id="user-content-header-3" class="anchor" href="#header-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Customization</h1>
+      <p>There are 4 different types of notifications: good, warning, danger, and attention.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Notification Type</th>
+            <th>Demo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Good</td>
+            <td><button class="button" onclick="simpleNotify.notify('Hey! This is a Good Notification.', 'good')">Click Here</button></td>
+          </tr>
+          <tr>
+            <td>Warning</td>
+            <td><button class="button" onclick="simpleNotify.notify('Hey! This is a Warning Notification.', 'warning')">Click Here</button></td>
+          </tr>
+          <tr>
+            <td>Danger</td>
+            <td><button class="button" onclick="simpleNotify.notify('Hey! This is a Danger Notification.', 'danger')">Click Here</button></td>
+          </tr>
+          <tr>
+            <td>Attention</td>
+            <td><button class="button" onclick="simpleNotify.notify('Hey! This is a Attention Notification.', 'attention')">Click Here</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>To select which type of notification you want to send, simply include it as the second argument to the simpleNotify function.</p>
+      <pre><code>simpleNotify.notify('Hey! This is a warning notification.'', ‘warning’);</code></pre>
+
+
+      <p>That's all there is to it. Enjoy!</p>
+
+      <p><em>If you wish to contribute to this project please feel free to fork the repo <a href="https://github.com/drewdulz/simpleNotify.js">github.com/drewdulz/simpleNotify.js</a> and create a pull request for any updates.</p>
+
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jasonlong/cayman-theme">Cayman</a> is maintained by <a href="https://github.com/jasonlong">jasonlong</a>.</span>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
   </body>
 
 </html>
