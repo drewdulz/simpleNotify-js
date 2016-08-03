@@ -4,7 +4,8 @@
   right: 0;
   width: 310px;
   height: auto;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .simple-notification-wrapper {
