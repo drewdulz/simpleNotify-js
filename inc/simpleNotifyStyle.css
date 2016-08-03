@@ -7,6 +7,14 @@
   overflow-y: scroll;
 }
 
+.simple-notification-wrapper {
+  max-height: 0px;
+
+  /* Animation on creation */
+  -webkit-animation: pushDown 500ms forwards;
+  animation: pushDown 500ms forwards;
+}
+
 .simple-notification {
   color: white; /* Default */
   border: 1px solid transparent;
@@ -21,15 +29,8 @@
   /* Animation on creation */
   -webkit-animation:slideIn 500ms forwards;
   animation: slideIn 500ms forwards;
-
-  /* Transition so all movements are smooth */
-  -webkit-transition: top 500ms;/* Safari */
-  -moz-transition: top 500ms;
-  -o-transition: top 500ms;
-  -ms-transition: top 500ms;
-  transition: top 500ms;
-  -webkit-transition-delay: 500ms; /* Safari */
-  transition-delay: 500ms;
+  -webkit-animation-delay: 100ms;
+  animation-delay: 100ms;
 }
 
 .simple-notification.warning {
@@ -80,4 +81,20 @@
 
 @-o-keyframes slideIn {
   100% { margin-left: 0px; }
+}
+
+@keyframes pushDown {
+  100% { max-height: 200px; }
+}
+
+@-webkit-keyframes slideIn {
+  100% { max-height: 200px; }
+}
+
+@-moz-keyframes slideIn {
+  100% { max-height: 200px; }
+}
+
+@-o-keyframes slideIn {
+  100% { max-height: 200px; }
 }

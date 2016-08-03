@@ -46,20 +46,26 @@ var simpleNotify = {
   },
 
   showNotification : function(notification) {
+      // Create the new notification element
       var newNotification = document.createElement("div");
       newNotification.className = simpleNotify.NOTIFICATION_CLASS_NAME + " " + notification.level;
       newNotification.id = notification.id;
       newNotification.innerHTML = notification.message;
       newNotification.style.marginLeft = simpleNotify.NOTIFICATION_WIDTH + 10 + "px";
+      // Create a wrapper for the notification element so that we can transition it nicely.
+      var notificationWrapper = document.createElement("div");
+      notificationWrapper.className = "simple-notification-wrapper";
+      notificationWrapper.appendChild(newNotification);
       // Add it to the DOM
       var notificationContainer = document.getElementById(simpleNotify.CONTAINER_ID_NAME);
-      notificationContainer.insertBefore(newNotification, notificationContainer.firstChild);
-      // Destroy it after the set time
+      notificationContainer.insertBefore(notificationWrapper, notificationContainer.firstChild);
+
+      // Destroy the notification after the set time
       setTimeout(function() {
           newNotification.className = newNotification.className + " fade-out";
           // Remove the notification from the DOM after the fade out has finished
           newNotification.addEventListener("transitionend",function(){
-              notificationContainer.removeChild(newNotification);
+              notificationContainer.removeChild(notificationWrapper);
           },false);
       }, simpleNotify.NOTIFICATION_TIME);
   }
