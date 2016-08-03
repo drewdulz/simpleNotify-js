@@ -1,20 +1,26 @@
-.simple-notification {
+.simple-notification-container {
   position: fixed;
+  top: 0;
+  right: 0;
+  width: 310px;
+  height: auto;
+  overflow-y: scroll;
+}
+
+.simple-notification {
   color: white; /* Default */
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 15px;
   width: 300px;
   opacity: 1;
-  margin-bottom: 20px;
+  margin-top: 10px;
   border: 1px solid transparent;
   font-family: sans-serif;
 
   /* Animation on creation */
   -webkit-animation:slideIn 500ms forwards;
   animation: slideIn 500ms forwards;
-  -webkit-animation-delay: 1s; /* Safari */
-  animation-delay: 1s;
 
   /* Transition so all movements are smooth */
   -webkit-transition: top 500ms;/* Safari */
@@ -61,17 +67,17 @@
 
 /* CSS Animations */
 @keyframes slideIn {
-  100% { right: 5px; }
+  100% { margin-left: 0px; }
 }
 
 @-webkit-keyframes slideIn {
-  100% { right: 5px; }
+  100% { margin-left: 0px; }
 }
 
 @-moz-keyframes slideIn {
-  100% { right: 5px; }
+  100% { margin-left: 0px; }
 }
 
 @-o-keyframes slideIn {
-  100% { right: 5px; }
+  100% { margin-left: 0px; }
 }
