@@ -25,9 +25,9 @@
       <p>SimpleNotify.js is a pure javascript library for sending quick notifications to the users of your web app. It doesn't depend on any external libraries and is very lightweight and simple.</p>
 
       <h1><a id="user-content-header-1" class="anchor" href="#header-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
-      <button class="button" onclick="simpleNotify.notify('Hey! This is a Simple Notification.')">Show a Notification</button>
+      <button class="button" onclick="simpleNotify.notify({ message:'Hey! This is a Simple Notification.'})">Show a Notification</button>
       <p>The notifications will automatically scale to fit the entire notification text.</p>
-      <button class="button" onclick="simpleNotify.notify('Hey! This is a Simple Notification. It has a lot of text in it, and as you can see the notification scales to fit it all automatically!', 'good')">Show a Long Notification</button>
+      <button class="button" onclick="simpleNotify.notify({ message:'Hey! This is a Simple Notification. It has a lot of text in it, and as you can see the notification scales to fit it all automatically!', level: 'good'})">Show a Long Notification</button>
       <p>The notifications will automatically dismiss after 7 seconds.</p>
 
 
@@ -35,7 +35,7 @@
       <p>SimpleNotify is easy to use.</p>
       <p>First include simpleNotify.js and simpleNotifyStyle.css avaliable <a href="https://drewdulz.github.io/simpleNotify.js/downloads/simpleNotify.zip">here.</a></p>
       <p>Then all you need to do is call the simpleNotify function with the desired message.</p>
-      <pre><code>simpleNotify.notify('Hey! This is a simple notification.');</code></pre>
+      <pre><code>simpleNotify.notify({ message:'Hey! This is a simple notification.'});</code></pre>
 
 
       <h1><a id="user-content-header-3" class="anchor" href="#header-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Customization</h1>
@@ -50,24 +50,24 @@
         <tbody>
           <tr>
             <td>Good</td>
-            <td><button class="button" onclick="simpleNotify.notify('Hey! This is a Good Notification.', 'good')">Demo</button></td>
+            <td><button class="button" onclick="simpleNotify.notify({message:'Hey! This is a Good Notification.', level: 'good'})">Demo</button></td>
           </tr>
           <tr>
             <td>Warning</td>
-            <td><button class="button" onclick="simpleNotify.notify('Hey! This is a Warning Notification.', 'warning')">Demo</button></td>
+            <td><button class="button" onclick="simpleNotify.notify({message: 'Hey! This is a Warning Notification.', level: 'warning'})">Demo</button></td>
           </tr>
           <tr>
             <td>Danger</td>
-            <td><button class="button" onclick="simpleNotify.notify('Hey! This is a Danger Notification.', 'danger')">Demo</button></td>
+            <td><button class="button" onclick="simpleNotify.notify({message:'Hey! This is a Danger Notification.',level: 'danger'})">Demo</button></td>
           </tr>
           <tr>
             <td>Attention</td>
-            <td><button class="button" onclick="simpleNotify.notify('Hey! This is an Attention Notification.', 'attention')">Demo</button></td>
+            <td><button class="button" onclick="simpleNotify.notify({message:'Hey! This is an Attention Notification.', level:'attention'})">Demo</button></td>
           </tr>
         </tbody>
       </table>
-      <p>To select which type of notification you want to send, simply include it as the second argument to the simpleNotify function.</p>
-      <pre><code>simpleNotify.notify('Hey! This is a warning notification.', ‘warning’);</code></pre>
+      <p>To select which type of notification you want to send, simply include it as `level` argument to the simpleNotify function.</p>
+      <pre><code>simpleNotify.notify({message: 'Hey! This is a warning notification.', level: ‘warning’});</code></pre>
 
 
       <p>That's all there is to it. Enjoy!</p>
